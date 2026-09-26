@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "pigmanvillagers",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": ["${mod_authors}"],
+  "contact": {
+    "homepage": "https://github.com/bh679/pigmanvillagers-mc",
+    "sources": "https://github.com/bh679/pigmanvillagers-mc",
+    "issues": "https://github.com/bh679/pigmanvillagers-mc/issues"
+  },
+  "license": "${mod_license}",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["games.brennan.pigmanvillagers.fabric.PigmanVillagersFabric"]
+  },
+  "mixins": [
+    "pigmanvillagers.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

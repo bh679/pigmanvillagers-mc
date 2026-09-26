@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "games.brennan.pigmanvillagers.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntityPlaySoundMixin",
+    "VillagerMixin"
+  ],
+  "client": [
+    "EntityRenderDispatcherMixin",
+    "VillagerRendererMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
