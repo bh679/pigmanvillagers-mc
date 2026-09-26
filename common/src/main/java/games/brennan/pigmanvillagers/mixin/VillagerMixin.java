@@ -3,6 +3,7 @@ package games.brennan.pigmanvillagers.mixin;
 import games.brennan.pigmanvillagers.PigmanConfig;
 import games.brennan.pigmanvillagers.PigmanVillagers;
 import games.brennan.pigmanvillagers.api.PigmanVillagerAccess;
+import games.brennan.pigmanvillagers.api.PigmanVillagersApi;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -30,12 +31,6 @@ public abstract class VillagerMixin implements PigmanVillagerAccess {
             SynchedEntityData.defineId(Villager.class, EntityDataSerializers.BOOLEAN);
 
     @Unique
-    private static final String PIGMANVILLAGERS$TAG_PIGMAN = "PigmanVillager";
-
-    @Unique
-    private static final String PIGMANVILLAGERS$TAG_ROLLED = "PigmanRolled";
-
-    @Unique
     private boolean pigmanvillagers$rolled;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
@@ -45,18 +40,18 @@ public abstract class VillagerMixin implements PigmanVillagerAccess {
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void pigmanvillagers$save(CompoundTag tag, CallbackInfo ci) {
-        tag.putBoolean(PIGMANVILLAGERS$TAG_PIGMAN, pigmanvillagers$isPigman());
-        tag.putBoolean(PIGMANVILLAGERS$TAG_ROLLED, pigmanvillagers$rolled);
+        tag.putBoolean(PigmanVillagersApi.NBT_PIGMAN, pigmanvillagers$isPigman());
+        tag.putBoolean(PigmanVillagersApi.NBT_ROLLED, pigmanvillagers$rolled);
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void pigmanvillagers$load(CompoundTag tag, CallbackInfo ci) {
-        if (tag.contains(PIGMANVILLAGERS$TAG_PIGMAN)) {
+        if (tag.contains(PigmanVillagersApi.NBT_PIGMAN)) {
             // An explicit value (e.g. /summon ... {PigmanVillager:1b}) counts as rolled.
-            pigmanvillagers$setPigman(tag.getBoolean(PIGMANVILLAGERS$TAG_PIGMAN));
+            pigmanvillagers$setPigman(tag.getBoolean(PigmanVillagersApi.NBT_PIGMAN));
         }
-        if (tag.contains(PIGMANVILLAGERS$TAG_ROLLED)) {
-            pigmanvillagers$rolled = tag.getBoolean(PIGMANVILLAGERS$TAG_ROLLED);
+        if (tag.contains(PigmanVillagersApi.NBT_ROLLED)) {
+            pigmanvillagers$rolled = tag.getBoolean(PigmanVillagersApi.NBT_ROLLED);
         }
     }
 
